@@ -1,0 +1,49 @@
+From 1ed4331f3e14fd1607828b5aae3a12d893e6ce04 Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Wed, 7 Oct 2020 22:27:02 +0700
+Subject: [PATCH] add spotlight support
+
+---
+ debian/control | 4 ++--
+ debian/rules   | 3 ++-
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/debian/control b/debian/control
+index cf387af..c7f67b1 100644
+--- a/debian/control
++++ b/debian/control
+@@ -47,6 +47,8 @@ Build-Depends: bison,
+                libtdb-dev (>= 1.4.2~),
+                libtevent-dev (>= 0.10.0~),
+                perl,
++               libtracker-miner-2.0-dev,
++               libtracker-sparql-2.0-dev,
+                pkg-config,
+                po-debconf,
+                python3-dev,
+@@ -61,8 +63,6 @@ Build-Depends: bison,
+                xfslibs-dev [linux-any],
+                xsltproc,
+                zlib1g-dev (>= 1:1.2.3)
+-Build-Conflicts: libtracker-miner-2.0-dev,
+-                 libtracker-sparql-2.0-dev
+ Rules-Requires-Root: binary-targets
+ Vcs-Browser: https://salsa.debian.org/samba-team/samba
+ Vcs-Git: https://salsa.debian.org/samba-team/samba.git
+diff --git a/debian/rules b/debian/rules
+index 0341151..e55d737 100755
+--- a/debian/rules
++++ b/debian/rules
+@@ -76,7 +76,8 @@ conf_args = \
+ 		--with-cluster-support \
+ 		--with-socketpath=/run/ctdb/ctdbd.socket \
+ 		--with-logdir=/var/log/ctdb \
+-		--enable-etcd-reclock
++		--enable-etcd-reclock \
++		--enable-spotlight
+ 
+ ifeq ($(UBUNTU_I386), 0)
+ ifneq (,$(filter amd64 arm64 armel armhf i386 mips64el mipsel ppc64el ppc64 s390x x32, $(DEB_HOST_ARCH)))
+-- 
+2.25.1
+
